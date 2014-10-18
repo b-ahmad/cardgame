@@ -13,17 +13,30 @@
 
 @interface CardGameViewController ()
 @property (nonatomic, strong)CardMatchingGame *game;
+@property (weak, nonatomic) IBOutlet UISwitch *gameTypeSwitch;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (nonatomic, strong)Deck *deck;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameTypeSegControl;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentationControlM;
+@property (readwrite, nonatomic) int gameType;
 @end
 
 @implementation CardGameViewController
 
+- (IBAction)changeGameType:(id)sender {
+    if (self.segmentationControlM.selectedSegmentIndex == 0) {
+        self.gameType = 2;
+    }else if (self.segmentationControlM.selectedSegmentIndex == 1)
+    {
+        self.gameType = 3;
+    }
+}
 
 
 - (Deck *)createDeck
 {
+    self.gameType = 2;
     return [[PlayingCardDeck alloc] init];
 }
 - (IBAction)dealButton:(id)sender {
@@ -47,9 +60,11 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
+    
+    NSLog(@"game type : %d", self.gameType);
    
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
-    [self.game chooseCardAtIndex:chosenButtonIndex];
+    [self.game chooseCardAtIndex:chosenButtonIndex gameType:self.gameType];
     [self updateUI];
     
 }

@@ -208,11 +208,17 @@
                                     <action selector="dealButton:" destination="2" eventType="touchUpInside" id="qAo-0i-ljF"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Kr2-Z0-D6m">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Kr2-Z0-D6m">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="137" id="uFj-lf-Jxj"/>
+                                </constraints>
                                 <segments>
                                     <segment title="2 card"/>
                                     <segment title="3 card"/>
                                 </segments>
+                                <connections>
+                                    <action selector="changeGameType:" destination="2" eventType="valueChanged" id="tro-gl-LgO"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -267,7 +273,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gameTypeSegControl" destination="Kr2-Z0-D6m" id="nnu-0m-fn9"/>
                         <outlet property="scoreLabel" destination="5p9-BV-Mnr" id="vlB-MA-a6Q"/>
+                        <outlet property="segmentationControlM" destination="Kr2-Z0-D6m" id="d86-YI-dmc"/>
                         <outletCollection property="cardButtons" destination="EDY-T5-6WI" id="lrZ-Lq-5bM"/>
                         <outletCollection property="cardButtons" destination="9FZ-3O-a5A" id="Kcm-ty-Oto"/>
                         <outletCollection property="cardButtons" destination="tUK-rq-qVL" id="XQX-3U-Vos"/>
@@ -289,20 +297,6 @@
     <resources>
         <image name="stanford_back.png" width="128" height="192"/>
     </resources>
-    <classes>
-        <class className="CardGameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dealButton:"/>
-                <relationship kind="action" name="touchCardButton:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
-                <relationship kind="outletCollection" name="cardButtons" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
