@@ -18,6 +18,7 @@
 @property (nonatomic, strong)Deck *deck;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameTypeSegControl;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusMsgLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentationControlM;
 @property (readwrite, nonatomic) int gameType;
 @end
@@ -42,6 +43,7 @@
 - (IBAction)dealButton:(id)sender {
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", 0];
     _game = nil;
+    self.gameTypeSegControl.enabled = YES;
     [self updateUI];
 }
 
@@ -65,6 +67,7 @@
    
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex gameType:self.gameType];
+    self.gameTypeSegControl.enabled = FALSE;
     [self updateUI];
     
 }
@@ -87,6 +90,7 @@
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+        self.statusMsgLabel.text = [NSString stringWithFormat:@"%@",self.game.statusMessage];
     }
 }
 

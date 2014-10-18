@@ -13,6 +13,7 @@
 @property (nonatomic, readwrite) BOOL nasirsVariable;
 @property (nonatomic, readwrite) BOOL threeCardsChosen;
 @property (nonatomic, readwrite) BOOL threeCardsMatched;
+@property (nonatomic, readwrite) NSString* statusMessage;
 @end
 
 
@@ -44,6 +45,7 @@
     }
     self.nasirsVariable = FALSE;
     self.threeCardsChosen = FALSE;
+    self.statusMessage = @"";
     return self;
 }
 
@@ -136,6 +138,7 @@ static const int MATCH_BONUS_3_CARDS = 3;
 - (void) chooseCardAtIndexTwoCards:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
+    NSLog(@"card %@", card.contents);
     if(!card.isMatched) {
         if(card.isChosen) {
             //card was already chosen, flipping it back (back side up)
@@ -162,6 +165,8 @@ static const int MATCH_BONUS_3_CARDS = 3;
                         self.score += matchScore * MATCH_BONUS;
                         otherCard.matched = YES;
                         card.matched = YES;
+                        
+                        self.statusMessage =[NSString stringWithFormat:@"%@ matched %@, points: %d", card.contents, otherCard.contents, matchScore] ;
                     } else {
                         self.score -= MISMATCH_PENALTY;
                         //otherCard.chosen = NO;

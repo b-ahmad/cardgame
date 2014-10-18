@@ -14,8 +14,8 @@
 - (instancetype) initWithCardCount:(NSUInteger)count usingDeck:(Deck*)deck;
 - (void) chooseCardAtIndex:(NSUInteger) index gameType:(int) game;
 - (Card*) cardAtIndex:(NSUInteger)index;
-- (NSString*) statusMessage;
 
 @property (nonatomic, readonly) NSInteger score;
+@property (nonatomic, readonly) NSString* statusMessage;
 
 @end
